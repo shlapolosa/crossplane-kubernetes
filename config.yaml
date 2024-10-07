@@ -6,3 +6,10 @@ metadata:
   name: crossplane-k8s
 spec:
   package: xpkg.upbound.io/devops-toolkit/dot-kubernetes:v0.12.138
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: Function
+metadata:
+  name: crossplane-contrib-function-kcl
+spec:
+  package: xpkg.upbound.io/crossplane-contrib/function-kcl:latest

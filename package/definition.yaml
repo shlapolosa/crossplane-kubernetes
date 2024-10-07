@@ -66,6 +66,17 @@ spec:
                     type: object
                     description: List of apps that should be installed in the cluster
                     properties:
+                      istio:
+                        description: Install istio
+                        type: object
+                        properties:
+                          enabled:
+                            type: boolean
+                            default: false
+                          hostname:
+                            type: string
+                            default: acme.com
+                        required: []
                       crossplane:
                         description: Install Crossplane
                         type: object

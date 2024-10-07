@@ -38,17 +38,21 @@ az login
 
 RESOURCE_GROUP=dot-$(date +%Y%m%d%H%M%S)
 
-export LOCATION=eastus
+export LOCATION=westus2
 
 az group create --name $RESOURCE_GROUP --location $LOCATION
 
 export SUBSCRIPTION_ID=$(az account show --query id -o tsv)
 
-az ad sp create-for-rbac --name a-team --role Owner --scopes /subscriptions/$SUBSCRIPTION_ID | tee azure-creds.json
+az ad sp create-for-rbac --sdk-auth --name heathsa --role Owner --scopes /subscriptions/$SUBSCRIPTION_ID | tee azure-creds.json
+
 
 kubectl --namespace crossplane-system \
     create secret generic azure-creds \
     --from-file creds=./azure-creds.json
+
+kubectl apply -f package  
+kubectl apply -f providers 
 
 kubectl apply --filename providers/provider-config-azure.yaml
 

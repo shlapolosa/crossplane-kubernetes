@@ -40,3 +40,5 @@ spec:
   package: xpkg.upbound.io/crossplane-contrib/provider-helm:v0.19.0
   controllerConfigRef:
     name: crossplane-provider-helm
+---
+

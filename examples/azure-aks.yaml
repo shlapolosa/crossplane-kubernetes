@@ -1,19 +1,35 @@
 apiVersion: devopstoolkitseries.com/v1alpha1
 kind: ClusterClaim
 metadata:
-  name: a-team
+  name: heathsa
 spec:
-  id: a-team
+  id: heathsa
   compositionSelector:
     matchLabels:
       provider: azure
       cluster: aks
   parameters:
     nodeSize: medium
-    minNodeCount: 1
+    minNodeCount: 2
     namespaces:
       - dev
       - production
     usage:
       # Usage is still in `alpha` and needs to be enabled by add `--set args='{"--enable-usages"}'` to `helm install`.
       enabled: true
+    apps:
+      crossplane:
+        enabled: true
+      argocd:
+        enabled: true
+        host: argocd.44.212.104.169.nip.io
+        repoURL: https://github.com/vfarcic/crossplane-kubernetes-gitops
+      dapr:
+        enabled: false
+      istio:
+        enabled: true
+        hostname: domain.default.com
+      traefik:
+        enabled: false
+      externalSecrets:
+        enabled: true
