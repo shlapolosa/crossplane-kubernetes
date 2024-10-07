@@ -1,19 +1,18 @@
 apiVersion: devopstoolkitseries.com/v1alpha1
 kind: ClusterClaim
 metadata:
-  name: heathsa
+  name: heathsa2
 spec:
-  id: heathsa
+  id: heathsa2
   compositionSelector:
     matchLabels:
       provider: azure
       cluster: aks
   parameters:
-    nodeSize: medium
+    nodeSize: small
     minNodeCount: 2
-    namespaces:
+    namespaces: #list of vclusters to create
       - dev
-      - production
     usage:
       # Usage is still in `alpha` and needs to be enabled by add `--set args='{"--enable-usages"}'` to `helm install`.
       enabled: true

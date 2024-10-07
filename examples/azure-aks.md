@@ -36,12 +36,6 @@ gum spin --spinner dot \
 
 az login
 
-RESOURCE_GROUP=dot-$(date +%Y%m%d%H%M%S)
-
-export LOCATION=westus2
-
-az group create --name $RESOURCE_GROUP --location $LOCATION
-
 export SUBSCRIPTION_ID=$(az account show --query id -o tsv)
 
 az ad sp create-for-rbac --sdk-auth --name heathsa --role Owner --scopes /subscriptions/$SUBSCRIPTION_ID | tee azure-creds.json
@@ -62,10 +56,16 @@ kubectl create namespace a-team
 ## Do
 
 ```sh
-kubectl --namespace a-team apply \
+kubectl --namespace heath-sa apply \
     --filename examples/azure-aks.yaml
 
 crossplane beta trace clusterclaim a-team --namespace a-team
+
+
+if error:
+
+The value of parameter agentPoolProfile.name is invalid. Please see https://aka.ms/aks-naming-rules for more details.
+then your name has a "-"
 ```
 
 ## Destroy
